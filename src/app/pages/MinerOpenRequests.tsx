@@ -215,14 +215,13 @@ function RequestCard({ req, index }: { req: OpenRequest; index: number }) {
       style={{
         backgroundColor: "#1e293b",
         borderRadius: "16px",
-        border: `1px solid ${hovered ? `${req.domainColor}28` : "rgba(255,255,255,0.06)"}`,
         borderLeft: `3px solid ${req.domainColor}`,
         overflow: "hidden",
         transition: "all 0.25s ease",
         transform: hovered ? "translateY(-3px)" : "translateY(0)",
         boxShadow: hovered
-          ? `0 16px 40px rgba(0,0,0,0.35), 0 0 20px ${req.domainColor}0f`
-          : "0 2px 8px rgba(0,0,0,0.18)",
+          ? `inset 0 0 0 1px ${req.domainColor}28, 0 16px 40px rgba(0,0,0,0.35), 0 0 20px ${req.domainColor}0f`
+          : "inset 0 0 0 1px rgba(255,255,255,0.06), 0 2px 8px rgba(0,0,0,0.18)",
         opacity: accepted ? 0.6 : 1,
         animationDelay: `${index * 80}ms`,
       }}
