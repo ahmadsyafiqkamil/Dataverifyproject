@@ -6,6 +6,7 @@ import { QualityPillarsSection } from "../components/landing/QualityPillarsSecti
 import { ForMinersSection }      from "../components/landing/ForMinersSection";
 import { ForValidatorsSection }  from "../components/landing/ForValidatorsSection";
 import { TrustSection }          from "../components/landing/TrustSection";
+import { SecuritySection }       from "../components/landing/SecuritySection";
 import { RoadmapSection }        from "../components/landing/RoadmapSection";
 import { CTASection }            from "../components/landing/CTASection";
 import { FooterSection }         from "../components/landing/FooterSection";
@@ -28,6 +29,7 @@ export function LandingPage() {
       <ForMinersSection />
       <ForValidatorsSection />
       <TrustSection />
+      <SecuritySection />
       <RoadmapSection />
       <CTASection />
       <FooterSection />
