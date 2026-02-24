@@ -7,6 +7,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { MarketplacePage } from "./pages/MarketplacePage";
 import { DatasetDetailPage } from "./pages/DatasetDetailPage";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
+import { MyRequestsPage } from "./pages/MyRequestsPage";
 import { MinerDashboard } from "./pages/MinerDashboard";
 import { MinerSubmit } from "./pages/MinerSubmit";
 import { MinerPlaceholder } from "./pages/MinerPlaceholder";
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
       { index: true, Component: DashboardPage },
       { path: "marketplace", Component: MarketplacePage },
       { path: "marketplace/:id", Component: DatasetDetailPage },
-      { path: "requests", Component: () => <PlaceholderPage title="My Requests" /> },
+      { path: "requests", Component: MyRequestsPage },
       { path: "history", Component: () => <PlaceholderPage title="History" /> },
       { path: "settings", Component: () => <PlaceholderPage title="Settings" /> },
     ],
