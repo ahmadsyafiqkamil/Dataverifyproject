@@ -259,7 +259,7 @@ export function MinerEarnings() {
         </div>
 
         <div style={{ width: "100%", height: 280 }}>
-          <ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={280}>
             <AreaChart data={earningsChartData} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
               <defs>
                 <linearGradient id="gradBase" x1="0" y1="0" x2="0" y2="1">
@@ -451,7 +451,7 @@ export function MinerEarnings() {
 
           {/* Donut chart */}
           <div style={{ width: "100%", height: 220 }}>
-            <ResponsiveContainer>
+            <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie
                   data={pieData}
