@@ -3,11 +3,12 @@ import { Outlet, useNavigate, useLocation } from "react-router";
 import {
   LayoutDashboard, Upload, ClipboardList, DollarSign,
   Settings, ChevronRight, Cpu, Wifi, Bell, Zap,
-  ExternalLink, BarChart3, Shield, ArrowLeft,
+  ExternalLink, BarChart3, Shield, ArrowLeft, Inbox,
 } from "lucide-react";
 
 const navItems = [
   { id: "overview", label: "Dashboard", icon: LayoutDashboard, path: "/miner" },
+  { id: "requests", label: "Open Requests", icon: Inbox, path: "/miner/requests", badge: "14" },
   { id: "submit", label: "Submit Dataset", icon: Upload, path: "/miner/submit" },
   { id: "submissions", label: "My Submissions", icon: ClipboardList, path: "/miner/submissions" },
   { id: "earnings", label: "Earnings", icon: DollarSign, path: "/miner/earnings" },
@@ -187,7 +188,7 @@ export function MinerLayout() {
         )}
 
         <nav className="flex flex-col gap-1 px-3 flex-1">
-          {navItems.map(({ id, label, icon: Icon, path }) => {
+          {navItems.map(({ id, label, icon: Icon, path, badge }) => {
             const isActive = active === id;
             return (
               <button
@@ -210,14 +211,22 @@ export function MinerLayout() {
                 <Icon
                   size={18}
                   style={{
-                    color: isActive ? "#f59e0b" : "#64748b",
-                    filter: isActive ? "drop-shadow(0 0 5px rgba(245,158,11,0.6))" : "none",
+                    color: isActive ? "#f59e0b" : id === "requests" ? "#38bdf8" : "#64748b",
+                    filter: isActive ? "drop-shadow(0 0 5px rgba(245,158,11,0.6))" : id === "requests" ? "drop-shadow(0 0 4px rgba(56,189,248,0.4))" : "none",
                     flexShrink: 0,
                   }}
                 />
                 {!collapsed && (
-                  <span style={{ color: isActive ? "#f59e0b" : "#64748b", fontSize: "0.86rem", fontWeight: isActive ? 600 : 400 }}>
+                  <span style={{ color: isActive ? "#f59e0b" : id === "requests" ? "#38bdf8" : "#64748b", fontSize: "0.86rem", fontWeight: isActive ? 600 : id === "requests" ? 600 : 400 }}>
                     {label}
+                  </span>
+                )}
+                {badge && !collapsed && (
+                  <span
+                    className="ml-auto px-1.5 py-0.5 rounded-md"
+                    style={{ backgroundColor: "rgba(56,189,248,0.12)", color: "#38bdf8", fontSize: "0.62rem", fontWeight: 700 }}
+                  >
+                    {badge}
                   </span>
                 )}
                 {id === "submissions" && !collapsed && (

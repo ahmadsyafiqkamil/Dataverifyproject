@@ -11,6 +11,7 @@ import { MyRequestsPage } from "./pages/MyRequestsPage";
 import { MinerDashboard } from "./pages/MinerDashboard";
 import { MinerSubmit } from "./pages/MinerSubmit";
 import { MinerPlaceholder } from "./pages/MinerPlaceholder";
+import { MinerOpenRequests } from "./pages/MinerOpenRequests";
 import { ValidatorDashboard } from "./pages/ValidatorDashboard";
 import { ValidatorPlaceholder } from "./pages/ValidatorPlaceholder";
 
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
     Component: MinerLayout,
     children: [
       { index: true, Component: MinerDashboard },
+      { path: "requests", Component: MinerOpenRequests },
       { path: "submit", Component: MinerSubmit },
       { path: "submissions", Component: MinerPlaceholder },
       { path: "earnings", Component: MinerPlaceholder },
