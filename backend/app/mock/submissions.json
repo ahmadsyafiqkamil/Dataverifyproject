@@ -1,0 +1,132 @@
+[
+  {
+    "id": "DS-4821",
+    "domain": "Healthcare",
+    "domainColor": "#38bdf8",
+    "dataType": "Tabular",
+    "score": 96,
+    "status": "Verified",
+    "reward": 42.5,
+    "bonus": "3x",
+    "date": "Feb 20, 2026",
+    "dateISO": "2026-02-20",
+    "records": "1.2M rows",
+    "fileSize": "4.7 GB",
+    "genMethod": "Custom GAN v4.2",
+    "submittedTime": "Feb 20, 2026 · 09:15 UTC",
+    "estimatedCompletion": null,
+    "screener1": "Passed",
+    "screener2": "Passed",
+    "fullValidation": "Passed",
+    "validationProgress": 100,
+    "dimensions": [
+      { "name": "Stat. Fidelity", "score": 98, "status": "done" },
+      { "name": "Privacy", "score": 95, "status": "done" },
+      { "name": "Bias & Fairness", "score": 94, "status": "done" },
+      { "name": "Utility", "score": 97, "status": "done" },
+      { "name": "Realism", "score": 96, "status": "done" }
+    ],
+    "validators": [
+      { "addr": "5GmCcrPH...dW9vR", "status": "submitted" },
+      { "addr": "5F3sa2TJ...nLmYi", "status": "submitted" },
+      { "addr": "5HqUkGZa...mK8Pp", "status": "submitted" }
+    ]
+  },
+  {
+    "id": "DS-4756",
+    "domain": "Finance",
+    "domainColor": "#34d399",
+    "dataType": "Time Series",
+    "score": null,
+    "status": "In Review",
+    "reward": null,
+    "bonus": null,
+    "date": "Feb 18, 2026",
+    "dateISO": "2026-02-18",
+    "records": "890K rows",
+    "fileSize": "2.1 GB",
+    "genMethod": "TimeGAN",
+    "submittedTime": "Feb 18, 2026 · 14:32 UTC",
+    "estimatedCompletion": "~4 hours",
+    "screener1": "Passed",
+    "screener2": "Passed",
+    "fullValidation": "In Progress",
+    "validationProgress": 60,
+    "dimensions": [
+      { "name": "Stat. Fidelity", "score": 91, "status": "done" },
+      { "name": "Privacy", "score": 88, "status": "done" },
+      { "name": "Bias & Fairness", "score": null, "status": "running" },
+      { "name": "Utility", "score": null, "status": "locked" },
+      { "name": "Realism", "score": null, "status": "locked" }
+    ],
+    "validators": [
+      { "addr": "5GmCcrPH...dW9vR", "status": "evaluating" },
+      { "addr": "5F3sa2TJ...nLmYi", "status": "evaluating" },
+      { "addr": "5HqUkGZa...mK8Pp", "status": "waiting" }
+    ]
+  },
+  {
+    "id": "DS-4612",
+    "domain": "NLP",
+    "domainColor": "#a78bfa",
+    "dataType": "Text",
+    "score": 78,
+    "status": "Rejected",
+    "reward": null,
+    "bonus": null,
+    "date": "Feb 15, 2026",
+    "dateISO": "2026-02-15",
+    "records": "500K rows",
+    "fileSize": "3.2 GB",
+    "genMethod": "GPT-NeoX Fine-tune",
+    "submittedTime": "Feb 15, 2026 · 11:00 UTC",
+    "estimatedCompletion": null,
+    "screener1": "Passed",
+    "screener2": "Failed",
+    "fullValidation": "Failed",
+    "validationProgress": 40,
+    "dimensions": [
+      { "name": "Stat. Fidelity", "score": 82, "status": "done" },
+      { "name": "Privacy", "score": 74, "status": "done" },
+      { "name": "Bias & Fairness", "score": null, "status": "locked" },
+      { "name": "Utility", "score": null, "status": "locked" },
+      { "name": "Realism", "score": null, "status": "locked" }
+    ],
+    "validators": [
+      { "addr": "5GmCcrPH...dW9vR", "status": "submitted" },
+      { "addr": "5F3sa2TJ...nLmYi", "status": "submitted" }
+    ]
+  },
+  {
+    "id": "DS-4534",
+    "domain": "Computer Vision",
+    "domainColor": "#f472b6",
+    "dataType": "Image",
+    "score": null,
+    "status": "Pending",
+    "reward": null,
+    "bonus": null,
+    "date": "Feb 24, 2026",
+    "dateISO": "2026-02-24",
+    "records": "200K images",
+    "fileSize": "58 GB",
+    "genMethod": "Stable Diffusion XL",
+    "submittedTime": "Feb 24, 2026 · 08:00 UTC",
+    "estimatedCompletion": "~12 hours",
+    "screener1": "Pending",
+    "screener2": "Pending",
+    "fullValidation": "Pending",
+    "validationProgress": 0,
+    "dimensions": [
+      { "name": "Stat. Fidelity", "score": null, "status": "locked" },
+      { "name": "Privacy", "score": null, "status": "locked" },
+      { "name": "Bias & Fairness", "score": null, "status": "locked" },
+      { "name": "Utility", "score": null, "status": "locked" },
+      { "name": "Realism", "score": null, "status": "locked" }
+    ],
+    "validators": [
+      { "addr": "5GmCcrPH...dW9vR", "status": "waiting" },
+      { "addr": "5F3sa2TJ...nLmYi", "status": "waiting" }
+    ]
+  }
+]

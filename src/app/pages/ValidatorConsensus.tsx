@@ -3,6 +3,7 @@ import {
   GitMerge, Clock, ShieldCheck, AlertTriangle, XCircle, Trophy,
   Info, Users, Filter, Link2, ChevronLeft, ChevronRight, Activity,
 } from "lucide-react";
+import { useValidatorConsensus } from "@/app/api/hooks/useValidatorApi";
 import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis,
   Tooltip, CartesianGrid, ReferenceLine, ReferenceArea,
@@ -122,6 +123,8 @@ export function ValidatorConsensus() {
   const [page, setPage] = useState(1);
   const [tooltipRow, setTooltipRow] = useState<string | null>(null);
   const totalPages = 4;
+  const { data: apiConsensus } = useValidatorConsensus();
+  const rows = (apiConsensus as typeof consensusRows | null) ?? consensusRows;
 
   const chartFiltered = chartRange === "7D" ? trendData.slice(-7) : chartRange === "3M" ? trendData : trendData;
 
@@ -278,7 +281,7 @@ export function ValidatorConsensus() {
               </tr>
             </thead>
             <tbody>
-              {consensusRows.map((r) => {
+              {rows.map((r) => {
                 const rs = resultStyles[r.result];
                 const isOutlier = r.result === "Outlier";
                 const isDisputed = r.result === "Disputed";

@@ -1,0 +1,18 @@
+{
+  "purchases": [
+    { "date": "Feb 23, 2026", "orderId": "ORD-0091", "datasetId": "DS-4812", "domain": "Healthcare", "dataType": "Tabular", "qualityScore": 94, "amount": 42.5, "license": "Extended", "status": "Completed" },
+    { "date": "Feb 21, 2026", "orderId": "ORD-0088", "datasetId": "DS-4781", "domain": "NLP", "dataType": "Text", "qualityScore": 97, "amount": 51.0, "license": "Commercial", "status": "Completed", "tag": "Best Value" },
+    { "date": "Feb 19, 2026", "orderId": "ORD-0085", "datasetId": "DS-4763", "domain": "Computer Vision", "dataType": "Image", "qualityScore": 85, "amount": 38.2, "license": "Basic", "status": "Completed" },
+    { "date": "Feb 17, 2026", "orderId": "ORD-0082", "datasetId": "DS-4710", "domain": "Autonomous", "dataType": "Multi-modal", "qualityScore": 91, "amount": 64.8, "license": "Extended", "status": "Completed" },
+    { "date": "Feb 15, 2026", "orderId": "ORD-0079", "datasetId": "DS-4698", "domain": "Finance", "dataType": "Time Series", "qualityScore": 89, "amount": 29.9, "license": "Commercial", "status": "Completed" },
+    { "date": "Feb 13, 2026", "orderId": "ORD-0076", "datasetId": "DS-4685", "domain": "Healthcare", "dataType": "Tabular", "qualityScore": null, "amount": 22.1, "license": "Basic", "status": "Processing" },
+    { "date": "Feb 10, 2026", "orderId": "ORD-0073", "datasetId": "DS-4670", "domain": "NLP", "dataType": "Text", "qualityScore": 72, "amount": 18.5, "license": "Basic", "status": "Refunded", "note": "Quality below threshold", "disputeLink": true },
+    { "date": "Feb 8, 2026", "orderId": "ORD-0070", "datasetId": "DS-4655", "domain": "Computer Vision", "dataType": "Image", "qualityScore": 88, "amount": 35.7, "license": "Extended", "status": "Completed" }
+  ],
+  "activeLicenses": [
+    { "datasetId": "DS-4812", "domain": "Healthcare", "dataType": "Tabular", "score": 94, "license": "Extended", "expires": "Feb 23, 2027", "downloads": "3 of unlimited" },
+    { "datasetId": "DS-4781", "domain": "NLP", "dataType": "Text", "score": 97, "license": "Commercial", "expires": "Feb 21, 2027", "downloads": "1 of unlimited" },
+    { "datasetId": "DS-4710", "domain": "Autonomous", "dataType": "Multi-modal", "score": 91, "license": "Extended", "expires": "Feb 15, 2027", "downloads": "5 of unlimited" },
+    { "datasetId": "DS-4698", "domain": "Finance", "dataType": "Time Series", "score": 89, "license": "Commercial", "expires": "Feb 13, 2027", "downloads": "2 of unlimited" }
+  ]
+}

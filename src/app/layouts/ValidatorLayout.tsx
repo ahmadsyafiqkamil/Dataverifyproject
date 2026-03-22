@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router";
+import { useValidatorNetworkStatus } from "../api/hooks/useNetworkApi";
 import {
   LayoutDashboard, ClipboardCheck, FileSearch,
   GitMerge, DollarSign, ChevronRight,
@@ -24,6 +25,7 @@ export function ValidatorLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const w = collapsed ? 70 : 228;
+  const { data: vs } = useValidatorNetworkStatus();
 
   const active = (() => {
     if (location.pathname === "/validator") return "overview";
@@ -84,22 +86,22 @@ export function ValidatorLayout() {
         <div className="hidden lg:flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#22c55e", boxShadow: "0 0 8px rgba(34,197,94,0.9)" }} />
-            <span style={{ color: "#22c55e", fontSize: "0.76rem", fontWeight: 600 }}>VALIDATING</span>
+            <span style={{ color: "#22c55e", fontSize: "0.76rem", fontWeight: 600 }}>{vs?.status ?? "VALIDATING"}</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
             <BarChart3 size={11} style={{ color: "#64748b" }} />
             <span style={{ color: "#64748b", fontSize: "0.71rem" }}>Block:</span>
-            <span style={{ color: "#94a3b8", fontSize: "0.71rem", fontWeight: 600 }}>#4,821,093</span>
+            <span style={{ color: "#94a3b8", fontSize: "0.71rem", fontWeight: 600 }}>{vs?.block ?? "#4,821,093"}</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
             <Activity size={11} style={{ color: "#64748b" }} />
             <span style={{ color: "#64748b", fontSize: "0.71rem" }}>Epoch:</span>
-            <span style={{ color: PURPLE, fontSize: "0.71rem", fontWeight: 600 }}>29 / 360 blocks</span>
+            <span style={{ color: PURPLE, fontSize: "0.71rem", fontWeight: 600 }}>{vs?.epoch ?? "29 / 360 blocks"}</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
             <Zap size={11} style={{ color: "#64748b" }} />
             <span style={{ color: "#64748b", fontSize: "0.71rem" }}>Emissions:</span>
-            <span style={{ color: "#38bdf8", fontSize: "0.71rem", fontWeight: 600 }}>3.82 τ/epoch</span>
+            <span style={{ color: "#38bdf8", fontSize: "0.71rem", fontWeight: 600 }}>{vs?.emissions ?? "3.82 τ/epoch"}</span>
           </div>
         </div>
 
@@ -112,7 +114,7 @@ export function ValidatorLayout() {
           >
             <ShieldCheck size={12} style={{ color: PURPLE }} />
             <span style={{ color: "#94a3b8", fontSize: "0.78rem" }}>My Stake:</span>
-            <span style={{ color: PURPLE, fontSize: "0.78rem", fontWeight: 700 }}>1,200 TAO</span>
+            <span style={{ color: PURPLE, fontSize: "0.78rem", fontWeight: 700 }}>{vs?.myStake ?? "1,200 TAO"}</span>
           </div>
 
           {/* Bell */}
@@ -234,11 +236,11 @@ export function ValidatorLayout() {
                 <span style={{ color: PURPLE, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em" }}>VALIDATOR STATUS</span>
               </div>
               {[
-                { k: "Subnet UID",    v: "42" },
-                { k: "Validators",   v: "64" },
-                { k: "My UID",       v: "12" },
-                { k: "Trust Score",  v: "0.974" },
-                { k: "Vtrust",       v: "0.961" },
+                { k: "Subnet UID",    v: vs?.subnetUID ?? "42" },
+                { k: "Validators",   v: vs?.validators ?? "64" },
+                { k: "My UID",       v: vs?.myUID ?? "12" },
+                { k: "Trust Score",  v: vs?.trustScore ?? "0.974" },
+                { k: "Vtrust",       v: vs?.vtrust ?? "0.961" },
               ].map(({ k, v }) => (
                 <div key={k} className="flex items-center justify-between mt-1.5">
                   <span style={{ color: "#334155", fontSize: "0.68rem" }}>{k}</span>

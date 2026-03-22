@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useValidatorStats } from "@/app/api/hooks/useValidatorApi";
 import {
   ShieldCheck, TrendingUp, CheckCircle2, Activity,
   Clock, Zap, User, Database, ChevronRight,
@@ -173,7 +174,7 @@ function Sparkline({ values, color }: { values: number[]; color: string }) {
 function StatCards() {
   return (
     <div className="grid grid-cols-4 gap-4 mb-5">
-      {STATS.map(({ id, label, value, sub, icon: Icon, color, bg, border, sparkline, isTao }) => (
+      {stats.map(({ id, label, value, sub, icon: Icon, color, bg, border, sparkline, isTao }) => (
         <div
           key={id}
           className="rounded-2xl px-5 py-4 flex flex-col gap-3 relative overflow-hidden"
@@ -681,6 +682,8 @@ function RecentConsensus() {
 ───────────────────────────────────────── */
 export function ValidatorDashboard() {
   const [activeDatasetId, setActiveDatasetId] = useState("DS-4829");
+  const { data: apiStats } = useValidatorStats();
+  const stats = (apiStats as typeof STATS | null) ?? STATS;
 
   return (
     <div>

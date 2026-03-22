@@ -3,6 +3,7 @@ import {
   ClipboardCheck, Clock, Search, ChevronDown, ArrowRight,
   ShieldCheck, CheckCircle2, Loader2, AlertCircle, Activity,
 } from "lucide-react";
+import { useValidatorPending, triggerEvaluation } from "@/app/api/hooks/useValidatorApi";
 
 /* ═══════════ TYPES & DATA ═══════════ */
 
@@ -125,20 +126,22 @@ export function ValidatorPendingEvals() {
   const [search, setSearch] = useState("");
   const [sortOpen, setSortOpen] = useState(false);
   const [sortBy, setSortBy] = useState("Priority");
+  const { data: apiPending } = useValidatorPending();
+  const queue = (apiPending as typeof evalQueue | null) ?? evalQueue;
 
   const filtered = useMemo(() => {
-    let list = evalQueue;
+    let list = queue;
     if (activeTab !== "All") list = list.filter((e) => e.stage === activeTab);
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter((e) => e.id.toLowerCase().includes(q));
     }
     return list;
-  }, [activeTab, search]);
+  }, [activeTab, search, queue]);
 
-  const screener1Count = evalQueue.filter((e) => e.stage === "Screener 1").length;
-  const screener2Count = evalQueue.filter((e) => e.stage === "Screener 2").length;
-  const fullCount = evalQueue.filter((e) => e.stage === "Full Validation").length;
+  const screener1Count = queue.filter((e) => e.stage === "Screener 1").length;
+  const screener2Count = queue.filter((e) => e.stage === "Screener 2").length;
+  const fullCount = queue.filter((e) => e.stage === "Full Validation").length;
 
   return (
     <div>
@@ -202,7 +205,7 @@ export function ValidatorPendingEvals() {
 
           {/* Stat pills */}
           <div className="flex items-center gap-2 flex-wrap mt-3">
-            <Pill label="Pending" value={String(evalQueue.length)} color="#f59e0b" />
+            <Pill label="Pending" value={String(queue.length)} color="#f59e0b" />
             <Pill label="In Screener 1" value={String(screener1Count)} color="#38bdf8" />
             <Pill label="In Screener 2" value={String(screener2Count)} color="#a855f7" />
             <Pill label="In Full Validation" value={String(fullCount)} color="#22c55e" />
@@ -231,7 +234,7 @@ export function ValidatorPendingEvals() {
         <div className="flex gap-1 flex-wrap">
           {(
             [
-              { key: "All", label: `All (${evalQueue.length})` },
+              { key: "All", label: `All (${queue.length})` },
               { key: "Screener 1", label: "Screener 1" },
               { key: "Screener 2", label: "Screener 2" },
               { key: "Full Validation", label: "Full Validation" },

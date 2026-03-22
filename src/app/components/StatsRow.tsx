@@ -1,6 +1,7 @@
 import { Database, Star, Coins, Activity, TrendingUp, TrendingDown } from "lucide-react";
+import { useBuyerStats } from "@/app/api/hooks/useBuyerApi";
 
-const stats = [
+const hardcodedStats = [
   {
     label: "Total Datasets",
     value: "2,847",
@@ -44,6 +45,9 @@ const stats = [
 ];
 
 export function StatsRow() {
+  const { data: apiStats } = useBuyerStats();
+  const stats = (apiStats as typeof hardcodedStats | null) ?? hardcodedStats;
+
   return (
     <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
       {stats.map((stat) => {

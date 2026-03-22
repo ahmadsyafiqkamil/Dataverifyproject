@@ -1,6 +1,7 @@
 import { CheckCircle, Clock, XCircle, RefreshCw, ChevronRight, ArrowUpDown } from "lucide-react";
+import { useBuyerActivity } from "@/app/api/hooks/useBuyerApi";
 
-const activities = [
+const hardcodedActivities = [
   {
     id: "DST-0041",
     name: "MedSynth-7B Clinical Records",
@@ -90,6 +91,9 @@ function ScoreBar({ score }: { score: number }) {
 }
 
 export function ActivityTable() {
+  const { data: apiActivities } = useBuyerActivity();
+  const activities = (apiActivities as typeof hardcodedActivities | null) ?? hardcodedActivities;
+
   return (
     <div>
       <div className="flex items-center justify-between mb-5">

@@ -5,6 +5,7 @@ import {
   ExternalLink, ArrowUpRight, Shield, Eye, Zap, Lock,
   Loader2, ChevronRight,
 } from "lucide-react";
+import { useMinerSubmissions } from "@/app/api/hooks/useMinerApi";
 
 /* ═══════ DATA ═══════ */
 
@@ -41,7 +42,7 @@ interface Submission {
   }[];
 }
 
-const submissions: Submission[] = [
+const hardcodedSubmissions: Submission[] = [
   {
     id: "DS-4821",
     domain: "Healthcare",
@@ -314,6 +315,9 @@ type PanelTab = "overview" | "score" | "log";
 
 /* ═══════ COMPONENT ═══════ */
 export function MinerSubmissions() {
+  const { data: apiSubmissions } = useMinerSubmissions();
+  const submissions = (apiSubmissions as unknown as Submission[]) ?? hardcodedSubmissions;
+
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"All" | SubmissionStatus>("All");
   const [selectedId, setSelectedId] = useState("DS-4534");
@@ -336,7 +340,7 @@ export function MinerSubmissions() {
         ? b.dateISO.localeCompare(a.dateISO)
         : a.dateISO.localeCompare(b.dateISO)
     );
-  }, [filter, search, sortDesc]);
+  }, [submissions, filter, search, sortDesc]);
 
   const selected = submissions.find((s) => s.id === selectedId) ?? submissions[3];
   const verifiedCount = submissions.filter((s) => s.status === "Verified").length;
