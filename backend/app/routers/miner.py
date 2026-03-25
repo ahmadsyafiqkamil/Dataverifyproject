@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from ..models.common import ApiResponse
 from ..models.miner import SubmitFormData
+from ..services.auth_service import require_auth
 from ..services.mock_data import mock_service
 
-router = APIRouter(prefix="/api/miner", tags=["miner"])
+router = APIRouter(prefix="/api/miner", tags=["miner"], dependencies=[Depends(require_auth)])
 
 
 @router.get("/dashboard/stats")

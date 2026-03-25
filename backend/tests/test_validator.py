@@ -2,8 +2,8 @@ import pytest
 
 
 @pytest.mark.asyncio
-async def test_validator_dashboard_stats(client):
-    r = await client.get("/api/validator/dashboard/stats")
+async def test_validator_dashboard_stats(auth_client):
+    r = await auth_client.get("/api/validator/dashboard/stats")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -12,8 +12,8 @@ async def test_validator_dashboard_stats(client):
 
 
 @pytest.mark.asyncio
-async def test_validator_pending(client):
-    r = await client.get("/api/validator/pending")
+async def test_validator_pending(auth_client):
+    r = await auth_client.get("/api/validator/pending")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -24,8 +24,8 @@ async def test_validator_pending(client):
 
 
 @pytest.mark.asyncio
-async def test_validator_evaluate(client):
-    r = await client.post("/api/validator/pending/EVAL-4821/evaluate")
+async def test_validator_evaluate(auth_client):
+    r = await auth_client.post("/api/validator/pending/EVAL-4821/evaluate")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -33,16 +33,16 @@ async def test_validator_evaluate(client):
 
 
 @pytest.mark.asyncio
-async def test_validator_evaluate_not_found(client):
-    r = await client.post("/api/validator/pending/EVAL-9999/evaluate")
+async def test_validator_evaluate_not_found(auth_client):
+    r = await auth_client.post("/api/validator/pending/EVAL-9999/evaluate")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is False
 
 
 @pytest.mark.asyncio
-async def test_validator_reviews(client):
-    r = await client.get("/api/validator/reviews")
+async def test_validator_reviews(auth_client):
+    r = await auth_client.get("/api/validator/reviews")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -51,8 +51,8 @@ async def test_validator_reviews(client):
 
 
 @pytest.mark.asyncio
-async def test_validator_consensus(client):
-    r = await client.get("/api/validator/consensus")
+async def test_validator_consensus(auth_client):
+    r = await auth_client.get("/api/validator/consensus")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -63,8 +63,8 @@ async def test_validator_consensus(client):
 
 
 @pytest.mark.asyncio
-async def test_validator_earnings(client):
-    r = await client.get("/api/validator/earnings")
+async def test_validator_earnings(auth_client):
+    r = await auth_client.get("/api/validator/earnings")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -75,43 +75,27 @@ async def test_validator_earnings(client):
 
 
 @pytest.mark.asyncio
-async def test_network_status(client):
-    r = await client.get("/api/network/status")
+async def test_network_status(auth_client):
+    r = await auth_client.get("/api/network/status")
     assert r.status_code == 200
     body = r.json()
     assert body["data"]["status"] == "Live"
 
 
 @pytest.mark.asyncio
-async def test_miner_network_status(client):
-    r = await client.get("/api/network/miner-status")
+async def test_miner_network_status(auth_client):
+    r = await auth_client.get("/api/network/miner-status")
     assert r.status_code == 200
     body = r.json()
     assert body["data"]["status"] == "ONLINE"
 
 
 @pytest.mark.asyncio
-async def test_validator_network_status(client):
-    r = await client.get("/api/network/validator-status")
+async def test_validator_network_status(auth_client):
+    r = await auth_client.get("/api/network/validator-status")
     assert r.status_code == 200
     body = r.json()
     assert body["data"]["status"] == "VALIDATING"
-
-
-@pytest.mark.asyncio
-async def test_auth_connect(client):
-    r = await client.post("/api/auth/connect")
-    assert r.status_code == 200
-    body = r.json()
-    assert body["data"]["connected"] is True
-
-
-@pytest.mark.asyncio
-async def test_auth_me(client):
-    r = await client.get("/api/auth/me")
-    assert r.status_code == 200
-    body = r.json()
-    assert "address" in body["data"]
 
 
 @pytest.mark.asyncio

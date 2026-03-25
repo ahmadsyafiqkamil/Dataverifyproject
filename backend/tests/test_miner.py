@@ -2,8 +2,8 @@ import pytest
 
 
 @pytest.mark.asyncio
-async def test_miner_dashboard_stats(client):
-    r = await client.get("/api/miner/dashboard/stats")
+async def test_miner_dashboard_stats(auth_client):
+    r = await auth_client.get("/api/miner/dashboard/stats")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -11,8 +11,8 @@ async def test_miner_dashboard_stats(client):
 
 
 @pytest.mark.asyncio
-async def test_miner_submissions(client):
-    r = await client.get("/api/miner/submissions")
+async def test_miner_submissions(auth_client):
+    r = await auth_client.get("/api/miner/submissions")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -23,13 +23,13 @@ async def test_miner_submissions(client):
 
 
 @pytest.mark.asyncio
-async def test_miner_submit(client):
+async def test_miner_submit(auth_client):
     payload = {
         "datasetName": "Test Dataset",
         "domain": "Healthcare",
         "dataType": "Tabular",
     }
-    r = await client.post("/api/miner/submissions", json=payload)
+    r = await auth_client.post("/api/miner/submissions", json=payload)
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -37,16 +37,16 @@ async def test_miner_submit(client):
 
 
 @pytest.mark.asyncio
-async def test_miner_requests(client):
-    r = await client.get("/api/miner/requests")
+async def test_miner_requests(auth_client):
+    r = await auth_client.get("/api/miner/requests")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
 
 
 @pytest.mark.asyncio
-async def test_miner_earnings(client):
-    r = await client.get("/api/miner/earnings")
+async def test_miner_earnings(auth_client):
+    r = await auth_client.get("/api/miner/earnings")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True

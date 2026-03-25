@@ -2,8 +2,8 @@ import pytest
 
 
 @pytest.mark.asyncio
-async def test_dashboard_stats(client):
-    r = await client.get("/api/buyer/dashboard/stats")
+async def test_dashboard_stats(auth_client):
+    r = await auth_client.get("/api/buyer/dashboard/stats")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -11,8 +11,8 @@ async def test_dashboard_stats(client):
 
 
 @pytest.mark.asyncio
-async def test_list_datasets(client):
-    r = await client.get("/api/buyer/datasets")
+async def test_list_datasets(auth_client):
+    r = await auth_client.get("/api/buyer/datasets")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -21,8 +21,8 @@ async def test_list_datasets(client):
 
 
 @pytest.mark.asyncio
-async def test_list_datasets_filter_domain(client):
-    r = await client.get("/api/buyer/datasets?domain=Healthcare")
+async def test_list_datasets_filter_domain(auth_client):
+    r = await auth_client.get("/api/buyer/datasets?domain=Healthcare")
     assert r.status_code == 200
     body = r.json()
     for ds in body["data"]:
@@ -30,16 +30,16 @@ async def test_list_datasets_filter_domain(client):
 
 
 @pytest.mark.asyncio
-async def test_list_datasets_search(client):
-    r = await client.get("/api/buyer/datasets?search=medsyn&limit=20")
+async def test_list_datasets_search(auth_client):
+    r = await auth_client.get("/api/buyer/datasets?search=medsyn&limit=20")
     assert r.status_code == 200
     body = r.json()
     assert body["meta"]["pagination"]["total"] >= 1
 
 
 @pytest.mark.asyncio
-async def test_list_datasets_pagination(client):
-    r = await client.get("/api/buyer/datasets?page=2&limit=6")
+async def test_list_datasets_pagination(auth_client):
+    r = await auth_client.get("/api/buyer/datasets?page=2&limit=6")
     assert r.status_code == 200
     body = r.json()
     assert body["meta"]["pagination"]["page"] == 2
@@ -47,8 +47,8 @@ async def test_list_datasets_pagination(client):
 
 
 @pytest.mark.asyncio
-async def test_get_dataset_by_id(client):
-    r = await client.get("/api/buyer/datasets/1")
+async def test_get_dataset_by_id(auth_client):
+    r = await auth_client.get("/api/buyer/datasets/1")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -57,8 +57,8 @@ async def test_get_dataset_by_id(client):
 
 
 @pytest.mark.asyncio
-async def test_get_dataset_not_found(client):
-    r = await client.get("/api/buyer/datasets/999")
+async def test_get_dataset_not_found(auth_client):
+    r = await auth_client.get("/api/buyer/datasets/999")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is False
@@ -66,8 +66,8 @@ async def test_get_dataset_not_found(client):
 
 
 @pytest.mark.asyncio
-async def test_purchase_dataset(client):
-    r = await client.post("/api/buyer/datasets/1/purchase")
+async def test_purchase_dataset(auth_client):
+    r = await auth_client.post("/api/buyer/datasets/1/purchase")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -75,8 +75,8 @@ async def test_purchase_dataset(client):
 
 
 @pytest.mark.asyncio
-async def test_activity(client):
-    r = await client.get("/api/buyer/activity")
+async def test_activity(auth_client):
+    r = await auth_client.get("/api/buyer/activity")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -84,8 +84,8 @@ async def test_activity(client):
 
 
 @pytest.mark.asyncio
-async def test_history(client):
-    r = await client.get("/api/buyer/history")
+async def test_history(auth_client):
+    r = await auth_client.get("/api/buyer/history")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True
@@ -94,8 +94,8 @@ async def test_history(client):
 
 
 @pytest.mark.asyncio
-async def test_requests(client):
-    r = await client.get("/api/buyer/requests")
+async def test_requests(auth_client):
+    r = await auth_client.get("/api/buyer/requests")
     assert r.status_code == 200
     body = r.json()
     assert body["success"] is True

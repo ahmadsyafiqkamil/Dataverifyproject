@@ -1,8 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from ..models.common import ApiResponse
+from ..services.auth_service import require_auth
 
-router = APIRouter(prefix="/api/network", tags=["network"])
+router = APIRouter(prefix="/api/network", tags=["network"], dependencies=[Depends(require_auth)])
 
 
 @router.get("/status")

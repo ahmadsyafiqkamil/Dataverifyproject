@@ -1,11 +1,12 @@
 import math
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, Query
 
 from ..models.common import ApiResponse
+from ..services.auth_service import require_auth
 from ..services.mock_data import mock_service
 
-router = APIRouter(prefix="/api/buyer", tags=["buyer"])
+router = APIRouter(prefix="/api/buyer", tags=["buyer"], dependencies=[Depends(require_auth)])
 
 
 @router.get("/dashboard/stats")
