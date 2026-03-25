@@ -46,7 +46,10 @@ const hardcodedStats = [
 
 export function StatsRow() {
   const { data: apiStats } = useBuyerStats();
-  const stats = (apiStats as typeof hardcodedStats | null) ?? hardcodedStats;
+  // Merge API values into hardcoded structure — API data is plain JSON (no icon/color)
+  const stats = apiStats
+    ? hardcodedStats.map((hc, i) => ({ ...hc, ...(apiStats[i] ?? {}) }))
+    : hardcodedStats;
 
   return (
     <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">

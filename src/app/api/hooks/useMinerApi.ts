@@ -15,11 +15,11 @@ export function useMinerStats() {
 }
 
 export function useMinerSubmissions() {
-  const [data, setData] = useState<Record<string, unknown>[] | null>(null);
+  const [data, setData] = useState<unknown[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    apiGet<Record<string, unknown>[]>("/api/miner/submissions")
+    apiGet<unknown[]>("/api/miner/submissions")
       .then((r) => { if (r.success) setData(r.data); })
       .finally(() => setLoading(false));
   }, []);

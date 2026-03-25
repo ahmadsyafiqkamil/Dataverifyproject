@@ -316,7 +316,7 @@ type PanelTab = "overview" | "score" | "log";
 /* ═══════ COMPONENT ═══════ */
 export function MinerSubmissions() {
   const { data: apiSubmissions } = useMinerSubmissions();
-  const submissions = (apiSubmissions as unknown as Submission[]) ?? hardcodedSubmissions;
+  const submissions = (apiSubmissions as Submission[]) ?? hardcodedSubmissions;
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"All" | SubmissionStatus>("All");
