@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useBuyerRequests } from "@/app/api/hooks/useBuyerApi";
 import {
   ClipboardList,
   ChevronRight,
@@ -48,7 +49,7 @@ const FORMATS: Record<string, string[]> = {
   "Time Series": ["CSV", "Parquet", "JSONL", "Custom"],
 };
 
-const PREVIOUS_REQUESTS = [
+const HARDCODED_PREVIOUS_REQUESTS = [
   {
     id: "REQ-2841",
     domain: "Healthcare",
@@ -731,6 +732,9 @@ function ActiveRequestsMini() {
 // ─── Main Page ─────────────────────────────────────────────────────────────────
 
 export function MyRequestsPage() {
+  const { data: apiRequests } = useBuyerRequests();
+  const PREVIOUS_REQUESTS = (apiRequests as typeof HARDCODED_PREVIOUS_REQUESTS | null) ?? HARDCODED_PREVIOUS_REQUESTS;
+
   const [currentStep, setCurrentStep] = useState(1);
 
   // Form state

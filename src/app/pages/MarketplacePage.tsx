@@ -1,8 +1,9 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Search, X, LayoutGrid, List, Sparkles, TrendingUp, Database, ChevronLeft, ChevronRight } from "lucide-react";
 import { FilterSidebar } from "../components/marketplace/FilterSidebar";
 import { MarketplaceCard } from "../components/marketplace/MarketplaceCard";
 import { allDatasets } from "../data/marketplaceDatasets";
+import { useDatasets } from "@/app/api/hooks/useBuyerApi";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -16,6 +17,14 @@ export function MarketplacePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
+  const { data: apiDatasets, meta, loading, refetch } = useDatasets({ limit: 6 });
+
+  // Refetch from API when filters/sort/page change
+  useEffect(() => {
+    const domain = selectedDomains.length === 1 ? selectedDomains[0] : undefined;
+    refetch({ domain, search: searchQuery || undefined, sortBy, page: currentPage, limit: 6 });
+  }, [searchQuery, selectedDomains, sortBy, currentPage, refetch]);
+
   // Domain ID to label map
   const domainMap: Record<string, string> = {
     healthcare: "Healthcare",
@@ -27,7 +36,7 @@ export function MarketplacePage() {
 
   // Filter and sort datasets
   const filtered = useMemo(() => {
-    let result = [...allDatasets];
+    let result = [...(apiDatasets ?? allDatasets) as typeof allDatasets];
 
     // Search
     if (searchQuery.trim()) {
@@ -67,10 +76,11 @@ export function MarketplacePage() {
     }
 
     return result;
-  }, [searchQuery, selectedDomains, qualityRange, priceRange, sortBy]);
+  }, [apiDatasets, searchQuery, selectedDomains, qualityRange, priceRange, sortBy]);
 
-  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-  const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+  const total = (meta?.pagination as any)?.total ?? filtered.length;
+  const totalPages = (meta?.pagination as any)?.pages ?? Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginated = apiDatasets ? (filtered as typeof allDatasets) : filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   const handlePageChange = (p: number) => {
     setCurrentPage(p);
@@ -250,7 +260,7 @@ export function MarketplacePage() {
             <div className="flex items-center gap-2">
               <span style={{ color: "#94a3b8", fontSize: "0.82rem" }}>
                 Showing{" "}
-                <span style={{ color: "white", fontWeight: 600 }}>{filtered.length}</span>
+                <span style={{ color: "white", fontWeight: 600 }}>{total}</span>
                 {" "}datasets
               </span>
               {searchQuery && (
@@ -315,7 +325,7 @@ export function MarketplacePage() {
           {totalPages > 1 && (
             <div className="flex items-center justify-between mt-8 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
               <span style={{ color: "#475569", fontSize: "0.78rem" }}>
-                Page {currentPage} of {totalPages} · {filtered.length} results
+                Page {currentPage} of {totalPages} · {total} results
               </span>
 
               <div className="flex items-center gap-1">

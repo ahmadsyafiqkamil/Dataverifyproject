@@ -1,0 +1,9 @@
+[
+  { "id": "DS-4812", "domain": "Healthcare", "domainColor": "#14b8a6", "myScore": 94, "shapley": 92.4, "deviation": 1.6, "result": "Aligned", "weightImpact": "No change", "note": null },
+  { "id": "DS-4798", "domain": "Finance", "domainColor": "#22c55e", "myScore": 88, "shapley": 89.1, "deviation": -1.1, "result": "Aligned", "weightImpact": "No change", "note": null },
+  { "id": "DS-4781", "domain": "NLP", "domainColor": "#ec4899", "myScore": 97, "shapley": 96.8, "deviation": 0.2, "result": "Aligned", "weightImpact": "No change", "note": null },
+  { "id": "DS-4763", "domain": "Computer Vision", "domainColor": "#3b82f6", "myScore": 71, "shapley": 85.2, "deviation": -14.2, "result": "Outlier", "weightImpact": "-0.003 weight", "note": "Deviation >10pts reduces your consensus weight for 1 cycle" },
+  { "id": "DS-4744", "domain": "Healthcare", "domainColor": "#14b8a6", "myScore": 42, "shapley": 44.1, "deviation": -2.1, "result": "Aligned", "weightImpact": "No change", "note": null },
+  { "id": "DS-4729", "domain": "Finance", "domainColor": "#22c55e", "myScore": 89, "shapley": 52.3, "deviation": 36.7, "result": "Disputed", "weightImpact": "-0.008 weight", "note": "Dispute filed by miner · Under review" },
+  { "id": "DS-4710", "domain": "Autonomous", "domainColor": "#6366f1", "myScore": 91, "shapley": 90.7, "deviation": 0.3, "result": "Aligned", "weightImpact": "No change", "note": null }
+]

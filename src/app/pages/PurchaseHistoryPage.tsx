@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePurchaseHistory } from "@/app/api/hooks/useBuyerApi";
 import {
   Clock, Download, ShoppingBag, Database, Key, Search,
   ChevronLeft, ChevronRight, ChevronDown, ChevronUp,
@@ -44,7 +45,7 @@ interface PurchaseRow {
   disputeLink?: boolean;
 }
 
-const purchases: PurchaseRow[] = [
+const hardcodedPurchases: PurchaseRow[] = [
   { date: "Feb 23, 2026", orderId: "ORD-0091", datasetId: "DS-4812", domain: "Healthcare", dataType: "Tabular", qualityScore: 94, amount: 42.5, license: "Extended", status: "Completed" },
   { date: "Feb 21, 2026", orderId: "ORD-0088", datasetId: "DS-4781", domain: "NLP", dataType: "Text", qualityScore: 97, amount: 51.0, license: "Commercial", status: "Completed", tag: "Best Value" },
   { date: "Feb 19, 2026", orderId: "ORD-0085", datasetId: "DS-4763", domain: "Computer Vision", dataType: "Image", qualityScore: 85, amount: 38.2, license: "Basic", status: "Completed" },
@@ -75,7 +76,7 @@ const domainSpendData = [
 const domainSpendMax = 128.4;
 
 /* ═══════ LICENSE DATA ═══════ */
-const activeLicenses = [
+const hardcodedActiveLicenses = [
   { datasetId: "DS-4812", domain: "Healthcare", dataType: "Tabular", score: 94, license: "Extended", expires: "Feb 23, 2027", downloads: "3 of unlimited" },
   { datasetId: "DS-4781", domain: "NLP", dataType: "Text", score: 97, license: "Commercial", expires: "Feb 21, 2027", downloads: "1 of unlimited" },
   { datasetId: "DS-4710", domain: "Autonomous", dataType: "Multi-modal", score: 91, license: "Extended", expires: "Feb 15, 2027", downloads: "5 of unlimited" },
@@ -144,6 +145,10 @@ function SpendTooltip({ active, payload, label }: any) {
 
 /* ═══════ MAIN COMPONENT ═══════ */
 export function PurchaseHistoryPage() {
+  const { data: apiData } = usePurchaseHistory();
+  const purchases = (apiData as { purchases?: PurchaseRow[]; activeLicenses?: typeof hardcodedActiveLicenses } | null)?.purchases ?? hardcodedPurchases;
+  const activeLicenses = (apiData as { purchases?: PurchaseRow[]; activeLicenses?: typeof hardcodedActiveLicenses } | null)?.activeLicenses ?? hardcodedActiveLicenses;
+
   const [activeTab, setActiveTab] = useState<"all" | "completed" | "processing" | "refunded">("all");
   const [expandedRow, setExpandedRow] = useState<string | null>("ORD-0091");
   const [page, setPage] = useState(1);

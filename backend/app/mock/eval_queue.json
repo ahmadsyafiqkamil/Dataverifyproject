@@ -1,0 +1,74 @@
+[
+  {
+    "id": "EVAL-4821",
+    "domain": "Healthcare",
+    "domainColor": "#14b8a6",
+    "dataType": "Tabular",
+    "miner": "5GrwvaEF...8PH3P",
+    "submitted": "2 hours ago",
+    "stage": "Screener 1",
+    "priority": "CRITICAL",
+    "note": "Flagged: unusual column distribution in age field",
+    "layers": [
+      { "name": "Schema Validation", "status": "done" },
+      { "name": "Statistical Tests", "status": "pending" },
+      { "name": "Privacy Audit", "status": "pending" },
+      { "name": "Bias Analysis", "status": "pending" },
+      { "name": "Utility Benchmark", "status": "pending" }
+    ]
+  },
+  {
+    "id": "EVAL-4819",
+    "domain": "Finance",
+    "domainColor": "#22c55e",
+    "dataType": "Time Series",
+    "miner": "5FHneW46...xugS9",
+    "submitted": "5 hours ago",
+    "stage": "Screener 2",
+    "priority": "HIGH",
+    "note": null,
+    "layers": [
+      { "name": "Schema Validation", "status": "done" },
+      { "name": "Statistical Tests", "status": "done" },
+      { "name": "Privacy Audit", "status": "pending" },
+      { "name": "Bias Analysis", "status": "pending" },
+      { "name": "Utility Benchmark", "status": "pending" }
+    ]
+  },
+  {
+    "id": "EVAL-4815",
+    "domain": "NLP",
+    "domainColor": "#ec4899",
+    "dataType": "Text",
+    "miner": "5GNJqTPy...hGFGx",
+    "submitted": "12 hours ago",
+    "stage": "Full Validation",
+    "priority": "MEDIUM",
+    "note": null,
+    "layers": [
+      { "name": "Schema Validation", "status": "done" },
+      { "name": "Statistical Tests", "status": "done" },
+      { "name": "Privacy Audit", "status": "done" },
+      { "name": "Bias Analysis", "status": "done" },
+      { "name": "Utility Benchmark", "status": "pending" }
+    ]
+  },
+  {
+    "id": "EVAL-4810",
+    "domain": "Healthcare",
+    "domainColor": "#14b8a6",
+    "dataType": "Tabular",
+    "miner": "5FLSigC9...x12vP",
+    "submitted": "1 day ago",
+    "stage": "Screener 1",
+    "priority": "LOW",
+    "note": null,
+    "layers": [
+      { "name": "Schema Validation", "status": "pending" },
+      { "name": "Statistical Tests", "status": "pending" },
+      { "name": "Privacy Audit", "status": "pending" },
+      { "name": "Bias Analysis", "status": "pending" },
+      { "name": "Utility Benchmark", "status": "pending" }
+    ]
+  }
+]

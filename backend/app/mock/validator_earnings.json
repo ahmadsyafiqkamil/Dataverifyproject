@@ -1,0 +1,21 @@
+{
+  "totalEarned": 214.6,
+  "thisEpoch": 52.3,
+  "avgPerEval": 24.1,
+  "transactions": [
+    { "date": "Feb 24, 2026", "datasetId": "DS-4812", "rewardType": "Accuracy Reward", "amount": 12.4, "multiplier": "2x (comprehensive)", "txHash": "0x3f4a...8c2d" },
+    { "date": "Feb 23, 2026", "datasetId": "DS-4798", "rewardType": "Accuracy Reward", "amount": 9.8, "multiplier": "1.5x", "txHash": "0x7b2e...1a9f" },
+    { "date": "Feb 22, 2026", "datasetId": "DS-4781", "rewardType": "Accuracy + Testing Bonus", "amount": 18.2, "multiplier": "2x", "txHash": "0x9c1d...4e7b" },
+    { "date": "Feb 21, 2026", "datasetId": "DS-4781", "rewardType": "Marketplace Royalty Share", "amount": 3.2, "multiplier": "—", "txHash": "0x2a8f...6d3c" },
+    { "date": "Feb 21, 2026", "datasetId": "EPOCH-2847", "rewardType": "Stake Emission", "amount": 5.1, "multiplier": "stake-weighted", "txHash": "0x1b3e...9f2a" },
+    { "date": "Feb 20, 2026", "datasetId": "DS-4763", "rewardType": "Accuracy Reward (reduced)", "amount": 2.1, "multiplier": "0.25x (outlier)", "txHash": "0x5d7c...3b8e", "reduced": true, "note": "Reward reduced: score deviated from consensus" },
+    { "date": "Feb 19, 2026", "datasetId": "DS-4744", "rewardType": "Evaluation Fee", "amount": 1.5, "multiplier": "base", "txHash": "0x8e2b...7c4f" }
+  ],
+  "domainBreakdown": [
+    { "name": "Healthcare", "value": 48.2 },
+    { "name": "Finance", "value": 38.7 },
+    { "name": "NLP", "value": 29.4 },
+    { "name": "Computer Vision", "value": 15.8 },
+    { "name": "Autonomous", "value": 10.7 }
+  ]
+}

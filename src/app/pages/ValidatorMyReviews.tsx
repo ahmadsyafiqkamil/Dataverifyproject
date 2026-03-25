@@ -4,6 +4,7 @@ import {
   ClipboardList, CheckCircle2, Shield, DollarSign, Activity,
   AlertTriangle, XCircle, ArrowUpRight, Info,
 } from "lucide-react";
+import { useValidatorReviews } from "@/app/api/hooks/useValidatorApi";
 
 /* ═══════ CONSTANTS ═══════ */
 const CARD_BG = "#1a2540";
@@ -105,9 +106,12 @@ export function ValidatorMyReviews() {
   const [page, setPage] = useState(1);
   const [domainOpen, setDomainOpen] = useState(false);
   const [dateOpen, setDateOpen] = useState(false);
+  const { data: apiReviews } = useValidatorReviews();
+  const reviews = (apiReviews as { reviews: typeof allReviews; dimensionAverages: typeof dimensionData } | null)?.reviews ?? allReviews;
+  const dimensions = (apiReviews as { reviews: typeof allReviews; dimensionAverages: typeof dimensionData } | null)?.dimensionAverages ?? dimensionData;
 
   const filtered = useMemo(() => {
-    let list = allReviews;
+    let list = reviews;
     if (filter !== "All") list = list.filter((r) => r.status === filter);
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -116,7 +120,7 @@ export function ValidatorMyReviews() {
       );
     }
     return list;
-  }, [filter, search]);
+  }, [filter, search, reviews]);
 
   const totalPages = 4; // mock 28 total / 7-10 per page
 
@@ -593,7 +597,7 @@ export function ValidatorMyReviews() {
           </p>
 
           <div className="flex flex-col gap-5">
-            {dimensionData.map((d) => {
+            {dimensions.map((d) => {
               const barColor =
                 d.avg >= 90 ? "#10b981" : d.avg >= 85 ? "#38bdf8" : "#f59e0b";
               return (

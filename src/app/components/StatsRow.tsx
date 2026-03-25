@@ -1,6 +1,7 @@
 import { Database, Star, Coins, Activity, TrendingUp, TrendingDown } from "lucide-react";
+import { useBuyerStats } from "@/app/api/hooks/useBuyerApi";
 
-const stats = [
+const hardcodedStats = [
   {
     label: "Total Datasets",
     value: "2,847",
@@ -44,6 +45,12 @@ const stats = [
 ];
 
 export function StatsRow() {
+  const { data: apiStats } = useBuyerStats();
+  // Merge API values into hardcoded structure — API data is plain JSON (no icon/color)
+  const stats = apiStats
+    ? hardcodedStats.map((hc, i) => ({ ...hc, ...(apiStats[i] ?? {}) }))
+    : hardcodedStats;
+
   return (
     <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
       {stats.map((stat) => {

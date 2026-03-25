@@ -17,6 +17,7 @@ import {
   ArrowUpDown,
   Layers,
 } from "lucide-react";
+import { useMinerRequests } from "@/app/api/hooks/useMinerApi";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -40,7 +41,7 @@ interface OpenRequest {
 
 // ─── Static request data ──────────────────────────────────────────────────────
 
-const REQUESTS: OpenRequest[] = [
+const HARDCODED_REQUESTS: OpenRequest[] = [
   {
     id: "REQ-2841",
     domain: "Healthcare",
@@ -593,6 +594,9 @@ function RequestCard({ req, index }: { req: OpenRequest; index: number }) {
 // ─── Main Page ─────────────────────────────────────────────────────────────────
 
 export function MinerOpenRequests() {
+  const { data: apiRequests } = useMinerRequests();
+  const REQUESTS = (apiRequests as unknown as OpenRequest[]) ?? HARDCODED_REQUESTS;
+
   const [filter, setFilter] = useState<"All" | "Healthcare" | "Finance" | "NLP">("All");
   const [sort, setSort] = useState<"budget" | "deadline" | "competition">("budget");
 

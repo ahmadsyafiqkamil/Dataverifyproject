@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router";
+import { AuthGuard } from "./components/auth/AuthGuard";
 import { RootLayout } from "./layouts/RootLayout";
 import { MinerLayout } from "./layouts/MinerLayout";
 import { ValidatorLayout } from "./layouts/ValidatorLayout";
 import { LandingPage } from "./pages/LandingPage";
+import { LoginPage } from "./pages/LoginPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { MarketplacePage } from "./pages/MarketplacePage";
 import { DatasetDetailPage } from "./pages/DatasetDetailPage";
@@ -23,12 +25,14 @@ import { ValidatorConsensus } from "./pages/ValidatorConsensus";
 import { ValidatorEarnings } from "./pages/ValidatorEarnings";
 
 export const router = createBrowserRouter([
-  // Standalone landing page — no layout wrapper
+  // Public routes — no auth required
   { path: "/landing", Component: LandingPage },
+  { path: "/login", Component: LoginPage },
 
+  // Protected: Buyer portal
   {
     path: "/",
-    Component: RootLayout,
+    element: <AuthGuard><RootLayout /></AuthGuard>,
     children: [
       { index: true, Component: DashboardPage },
       { path: "marketplace", Component: MarketplacePage },
@@ -38,9 +42,11 @@ export const router = createBrowserRouter([
       { path: "settings", Component: () => <PlaceholderPage title="Settings" /> },
     ],
   },
+
+  // Protected: Miner portal
   {
     path: "/miner",
-    Component: MinerLayout,
+    element: <AuthGuard><MinerLayout /></AuthGuard>,
     children: [
       { index: true, Component: MinerDashboard },
       { path: "requests", Component: MinerOpenRequests },
@@ -50,9 +56,11 @@ export const router = createBrowserRouter([
       { path: "settings", Component: MinerPlaceholder },
     ],
   },
+
+  // Protected: Validator portal
   {
     path: "/validator",
-    Component: ValidatorLayout,
+    element: <AuthGuard><ValidatorLayout /></AuthGuard>,
     children: [
       { index: true, Component: ValidatorDashboard },
       { path: "pending",   Component: ValidatorPendingEvals },

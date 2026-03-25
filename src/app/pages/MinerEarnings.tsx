@@ -7,9 +7,10 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RTooltip,
   ResponsiveContainer, PieChart, Pie, Cell, Legend,
 } from "recharts";
+import { useMinerEarnings } from "@/app/api/hooks/useMinerApi";
 
 /* ── mock data ── */
-const earningsChartData = Array.from({ length: 30 }, (_, i) => {
+const hardcodedChartData = Array.from({ length: 30 }, (_, i) => {
   const day = i + 1;
   return {
     day: `Feb ${day}`,
@@ -18,7 +19,7 @@ const earningsChartData = Array.from({ length: 30 }, (_, i) => {
   };
 });
 
-const royaltyData = [
+const hardcodedRoyaltyData = [
   { id: "DS-4821", domain: "Healthcare", sold: 503, royalty: 28.4, lastSale: "Feb 23", status: "Active" },
   { id: "DS-4756", domain: "Finance", sold: 312, royalty: 11.2, lastSale: "Feb 22", status: "Active" },
   { id: "DS-4612", domain: "NLP", sold: 178, royalty: 5.8, lastSale: "Feb 20", status: "Active" },
@@ -26,14 +27,14 @@ const royaltyData = [
   { id: "DS-4287", domain: "Healthcare", sold: 0, royalty: 0.0, lastSale: "—", status: "Rejected" },
 ];
 
-const pieData = [
+const hardcodedPieData = [
   { name: "Base Reward", value: 8.1, color: "#38bdf8" },
   { name: "Quality Bonus", value: 4.2, color: "#22c55e" },
   { name: "Royalties", value: 2.4, color: "#a855f7" },
   { name: "Innovation Premium", value: 0, color: "#334155" },
 ];
 
-const payoutHistory = [
+const hardcodedPayoutHistory = [
   { date: "Feb 23", epoch: 247, type: "Quality Bonus", dataset: "DS-4821", amount: 4.2, hash: "0x7f3b…c912" },
   { date: "Feb 23", epoch: 247, type: "Base Reward", dataset: "DS-4821", amount: 8.1, hash: "0x2a1e…f047" },
   { date: "Feb 22", epoch: 246, type: "Royalty", dataset: "DS-4756", amount: 2.1, hash: "0x9d4c…a3b2" },
@@ -92,6 +93,13 @@ function ChartTooltip({ active, payload, label }: any) {
 
 /* ── page ── */
 export function MinerEarnings() {
+  const { data: apiEarnings } = useMinerEarnings();
+
+  const earningsChartData = (apiEarnings?.chart as typeof hardcodedChartData) ?? hardcodedChartData;
+  const royaltyData = (apiEarnings?.royalties as typeof hardcodedRoyaltyData) ?? hardcodedRoyaltyData;
+  const pieData = (apiEarnings?.pie as typeof hardcodedPieData) ?? hardcodedPieData;
+  const payoutHistory = (apiEarnings?.payouts as typeof hardcodedPayoutHistory) ?? hardcodedPayoutHistory;
+
   const [chartRange, setChartRange] = useState<string>("1M");
   const [royaltyFilter, setRoyaltyFilter] = useState<string>("All");
 

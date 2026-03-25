@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router";
 import { Navbar } from "../components/Navbar";
+import { useNetworkStatus } from "../api/hooks/useNetworkApi";
 import {
   LayoutDashboard,
   ShoppingBag,
@@ -27,6 +28,7 @@ export function RootLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const sidebarWidth = collapsed ? 70 : 220;
+  const { data: networkStatus } = useNetworkStatus();
 
   const getActive = () => {
     const match = navItems.find(n => {
@@ -257,16 +259,16 @@ export function RootLayout() {
                 <span style={{ color: "#64748b", fontSize: "0.72rem" }}>Status</span>
                 <div className="flex items-center gap-1.5">
                   <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "#22c55e", boxShadow: "0 0 6px rgba(34,197,94,0.8)" }} />
-                  <span style={{ color: "#22c55e", fontSize: "0.72rem", fontWeight: 600 }}>Live</span>
+                  <span style={{ color: "#22c55e", fontSize: "0.72rem", fontWeight: 600 }}>{networkStatus?.status ?? "Live"}</span>
                 </div>
               </div>
               <div className="flex items-center justify-between mt-1">
                 <span style={{ color: "#64748b", fontSize: "0.72rem" }}>Validators</span>
-                <span style={{ color: "#94a3b8", fontSize: "0.72rem", fontWeight: 600 }}>128</span>
+                <span style={{ color: "#94a3b8", fontSize: "0.72rem", fontWeight: 600 }}>{networkStatus?.validators ?? "128"}</span>
               </div>
               <div className="flex items-center justify-between mt-1">
                 <span style={{ color: "#64748b", fontSize: "0.72rem" }}>Block</span>
-                <span style={{ color: "#94a3b8", fontSize: "0.72rem", fontWeight: 600 }}>#4,821,093</span>
+                <span style={{ color: "#94a3b8", fontSize: "0.72rem", fontWeight: 600 }}>{networkStatus?.block ?? "#4,821,093"}</span>
               </div>
             </div>
           )}

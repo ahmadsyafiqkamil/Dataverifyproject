@@ -3,8 +3,18 @@ import { DatasetCards } from "../components/DatasetCards";
 import { ActivityTable } from "../components/ActivityTable";
 import { ActivityChart, TaoChart } from "../components/MiniChart";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { useAuthContext } from "../context/AuthContext";
+
+function formatAddress(address: string | null, isDemo: boolean): string {
+  if (isDemo || !address) return "Demo User";
+  if (address.length > 16) return `${address.slice(0, 8)}...${address.slice(-6)}`;
+  return address;
+}
 
 export function DashboardPage() {
+  const { address, isDemo } = useAuthContext();
+  const displayName = formatAddress(address, isDemo);
+
   return (
     <div>
       {/* Welcome banner */}
@@ -36,7 +46,7 @@ export function DashboardPage() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              Ahmad
+              {displayName}
             </span>
           </h1>
           <p style={{ color: "#475569", fontSize: "0.9rem", marginTop: "6px" }}>

@@ -1,0 +1,34 @@
+{
+  "totalEarned": 142.8,
+  "thisEpoch": 14.7,
+  "royaltyIncome": 47.2,
+  "chart": [
+    { "day": "Mon", "base": 5.2, "royalty": 1.8 },
+    { "day": "Tue", "base": 7.1, "royalty": 2.3 },
+    { "day": "Wed", "base": 4.8, "royalty": 3.1 },
+    { "day": "Thu", "base": 8.4, "royalty": 2.7 },
+    { "day": "Fri", "base": 6.3, "royalty": 1.9 },
+    { "day": "Sat", "base": 9.1, "royalty": 4.2 },
+    { "day": "Sun", "base": 7.6, "royalty": 2.8 }
+  ],
+  "pie": [
+    { "name": "Base Reward", "value": 8.1, "color": "#38bdf8" },
+    { "name": "Quality Bonus", "value": 4.2, "color": "#22c55e" },
+    { "name": "Royalties", "value": 2.4, "color": "#a855f7" },
+    { "name": "Innovation Premium", "value": 0, "color": "#334155" }
+  ],
+  "royalties": [
+    { "id": "DS-4821", "domain": "Healthcare", "sold": 503, "royalty": 28.4, "lastSale": "Feb 23", "status": "Active" },
+    { "id": "DS-4756", "domain": "Finance", "sold": 312, "royalty": 11.2, "lastSale": "Feb 22", "status": "Active" },
+    { "id": "DS-4612", "domain": "NLP", "sold": 178, "royalty": 5.8, "lastSale": "Feb 20", "status": "Active" },
+    { "id": "DS-4534", "domain": "Comp. Vision", "sold": 42, "royalty": 1.8, "lastSale": "Feb 10", "status": "Active" },
+    { "id": "DS-4287", "domain": "Healthcare", "sold": 0, "royalty": 0.0, "lastSale": "—", "status": "Rejected" }
+  ],
+  "payouts": [
+    { "date": "Feb 23", "epoch": 247, "type": "Quality Bonus", "dataset": "DS-4821", "amount": 4.2, "hash": "0x7f3b…c912" },
+    { "date": "Feb 23", "epoch": 247, "type": "Base Reward", "dataset": "DS-4821", "amount": 8.1, "hash": "0x2a1e…f047" },
+    { "date": "Feb 22", "epoch": 246, "type": "Royalty", "dataset": "DS-4756", "amount": 2.1, "hash": "0x9d4c…a3b2" },
+    { "date": "Feb 21", "epoch": 245, "type": "Base Reward", "dataset": "DS-4612", "amount": 6.7, "hash": "0x5e8f…d621" },
+    { "date": "Feb 20", "epoch": 244, "type": "Royalty", "dataset": "DS-4821", "amount": 3.4, "hash": "0xb1a7…8f33" }
+  ]
+}

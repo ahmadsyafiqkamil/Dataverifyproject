@@ -4,6 +4,7 @@ import {
   ChevronLeft, ChevronRight, Info, Coins, Shield, TrendingUp,
   GitMerge,
 } from "lucide-react";
+import { useValidatorEarnings } from "@/app/api/hooks/useValidatorApi";
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ReferenceLine, Cell, PieChart, Pie, Cell as PieCell,
@@ -91,6 +92,10 @@ export function ValidatorEarnings() {
   const [chartRange, setChartRange] = useState<"7D" | "30D" | "3M">("30D");
   const [page, setPage] = useState(1);
   const totalPages = 21;
+  const { data: apiEarnings } = useValidatorEarnings();
+  const earningsData = apiEarnings as { totalEarned?: number; thisEpoch?: number; avgPerEval?: number; transactions?: typeof txLog; domainBreakdown?: typeof domainData } | null;
+  const transactions = earningsData?.transactions ?? txLog;
+  const domains = earningsData?.domainBreakdown ?? domainData;
 
   const chartSlice = chartRange === "7D" ? dailyEarnings.slice(-7) : dailyEarnings;
 
@@ -253,14 +258,14 @@ export function ValidatorEarnings() {
           <h3 style={{ color: "white", fontSize: "1rem", fontWeight: 700, marginBottom: 4 }}>Earnings by Domain</h3>
           <p style={{ color: "#475569", fontSize: "0.78rem", marginBottom: 20 }}>TAO earned by dataset domain</p>
           <div className="flex flex-col gap-5">
-            {domainData.map((d) => (
+            {domains.map((d) => (
               <div key={d.name}>
                 <div className="flex items-center justify-between mb-1.5">
                   <span style={{ color: "#94a3b8", fontSize: "0.8rem" }}>{d.name}</span>
                   <span style={{ color: PURPLE, fontSize: "0.85rem", fontWeight: 700, fontFamily: "monospace" }}>{d.value} τ</span>
                 </div>
                 <div className="h-3 rounded-full overflow-hidden" style={{ backgroundColor: "rgba(255,255,255,0.04)" }}>
-                  <div className="h-full rounded-full" style={{ width: `${(d.value / domainMax) * 100}%`, background: `linear-gradient(90deg, ${PURPLE}, #a855f7)` }} />
+                  <div className="h-full rounded-full" style={{ width: `${(d.value / (Math.max(...domains.map((x) => x.value)) || 1)) * 100}%`, background: `linear-gradient(90deg, ${PURPLE}, #a855f7)` }} />
                 </div>
               </div>
             ))}
@@ -291,7 +296,7 @@ export function ValidatorEarnings() {
               </tr>
             </thead>
             <tbody>
-              {txLog.map((r, i) => (
+              {transactions.map((r, i) => (
                 <tr key={i}>
                   <td colSpan={6} style={{ padding: 0 }}>
                     <div

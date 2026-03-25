@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router";
+import { useMinerNetworkStatus } from "../api/hooks/useNetworkApi";
 import {
   LayoutDashboard, Upload, ClipboardList, DollarSign,
   Settings, ChevronRight, Cpu, Wifi, Bell, Zap,
@@ -20,6 +21,7 @@ export function MinerLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const w = collapsed ? 70 : 220;
+  const { data: ns } = useMinerNetworkStatus();
 
   const active = (() => {
     if (location.pathname === "/miner") return "overview";
@@ -87,17 +89,17 @@ export function MinerLayout() {
         <div className="hidden lg:flex items-center gap-5">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#22c55e", boxShadow: "0 0 8px rgba(34,197,94,0.8)" }} />
-            <span style={{ color: "#22c55e", fontSize: "0.78rem", fontWeight: 600 }}>ONLINE</span>
+            <span style={{ color: "#22c55e", fontSize: "0.78rem", fontWeight: 600 }}>{ns?.status ?? "ONLINE"}</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
             <BarChart3 size={12} style={{ color: "#64748b" }} />
             <span style={{ color: "#64748b", fontSize: "0.72rem" }}>Block:</span>
-            <span style={{ color: "#94a3b8", fontSize: "0.72rem", fontWeight: 600 }}>#4,821,093</span>
+            <span style={{ color: "#94a3b8", fontSize: "0.72rem", fontWeight: 600 }}>{ns?.block ?? "#4,821,093"}</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
             <Zap size={12} style={{ color: "#64748b" }} />
             <span style={{ color: "#64748b", fontSize: "0.72rem" }}>Emissions:</span>
-            <span style={{ color: "#f59e0b", fontSize: "0.72rem", fontWeight: 600 }}>2.14 τ/epoch</span>
+            <span style={{ color: "#f59e0b", fontSize: "0.72rem", fontWeight: 600 }}>{ns?.emissions ?? "2.14 τ/epoch"}</span>
           </div>
         </div>
 
@@ -113,7 +115,7 @@ export function MinerLayout() {
           >
             <Shield size={12} style={{ color: "#22c55e" }} />
             <span style={{ color: "#94a3b8", fontSize: "0.78rem" }}>My Stake:</span>
-            <span style={{ color: "#22c55e", fontSize: "0.78rem", fontWeight: 700 }}>450 TAO</span>
+            <span style={{ color: "#22c55e", fontSize: "0.78rem", fontWeight: 700 }}>{ns?.myStake ?? "450 TAO"}</span>
           </div>
 
           {/* Bell */}
@@ -256,10 +258,10 @@ export function MinerLayout() {
                 <span style={{ color: "#f59e0b", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.08em" }}>SUBNET STATUS</span>
               </div>
               {[
-                { k: "Subnet UID", v: "42" },
-                { k: "Miners", v: "256" },
-                { k: "My UID", v: "47" },
-                { k: "Incentive", v: "0.0041 τ" },
+                { k: "Subnet UID", v: ns?.subnetUID ?? "42" },
+                { k: "Miners", v: ns?.miners ?? "256" },
+                { k: "My UID", v: ns?.myUID ?? "47" },
+                { k: "Incentive", v: ns?.incentive ?? "0.0041 τ" },
               ].map(({ k, v }) => (
                 <div key={k} className="flex items-center justify-between mt-1.5">
                   <span style={{ color: "#475569", fontSize: "0.7rem" }}>{k}</span>
