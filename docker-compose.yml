@@ -1,21 +1,18 @@
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.frontend
-    ports:
-      - "5173:5173"
-    environment:
-      - VITE_API_URL=http://backend:8000
-    depends_on:
-      - backend
-
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8080:8000"
     environment:
-      - CORS_ORIGINS=["http://localhost:5173","http://localhost:3000"]
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+      - CORS_ORIGINS=["http://localhost:3000"]
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
