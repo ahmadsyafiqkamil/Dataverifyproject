@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate } from "react-router";
 import { Wallet, Zap, AlertCircle, Loader2 } from "lucide-react";
 import { useAuth } from "../api/hooks/useAuth";
 
@@ -11,10 +11,9 @@ export function LoginPage() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
 
-  // Already logged in → redirect
+  // Already logged in → redirect (use component, not imperative navigate during render)
   if (isAuthenticated) {
-    navigate("/", { replace: true });
-    return null;
+    return <Navigate to="/" replace />;
   }
 
   async function handleDemo() {
